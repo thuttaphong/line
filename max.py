@@ -19,9 +19,22 @@ botStart = time.time()
 #==============================================================================#
 #line = LINE()
 #line = LINE("Email","Passwd")
-line = LINE('')
-line.log("Auth Token : " + str(line.authToken))
-line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+from qr import QRLogin
+print ("test")
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
+qrv2 = QRLogin()
+result = qrv2.loginWithQrCode("ipad")
+#=====================================================================
+APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
+line = LINE(result.accessToken,appName=APP)
+print(line.authToken)
+print ("Login Succes")
+# line = LINE('')
+# line.log("Auth Token : " + str(line.authToken))
+# line.log("Timeline Token : " + str(line.tl.channelAccessToken))
 
 #ki = LINE()
 #ki.log("Auth Token : " + str(ki.authToken))
