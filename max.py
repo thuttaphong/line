@@ -4192,7 +4192,9 @@ while True:
         print('ops')
         if ops is not None:
             for op in ops:
+                print (op)
                 lineBot(op)
                 oepoll.setRevision(op.revision)
+                print ('revision')
     except Exception as e:
         logError(e)
