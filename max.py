@@ -4187,6 +4187,7 @@ def lineBot(op):
 #==============================================================================#
 while True:
     try:
+        print('true')
         ops = oepoll.singleTrace(count=50)
         if ops is not None:
             for op in ops:
