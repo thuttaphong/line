@@ -20,7 +20,6 @@ botStart = time.time()
 #line = LINE()
 #line = LINE("Email","Passwd")
 from qr import QRLogin
-print ("test")
 try:
     import urllib.request as urllib2
 except ImportError:
