@@ -414,7 +414,7 @@ def helplanguange():
 #==============================================================================#
 def lineBot(op):
     try:
-    	
+        print(op)
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
@@ -479,7 +479,6 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
-            print(text)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
