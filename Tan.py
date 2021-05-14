@@ -416,7 +416,6 @@ def lineBot(op):
 
 
     try:
-        print(op.message)
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
@@ -481,6 +480,11 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
+            print(msg)
+            print(text)
+            print(msg_id)
+            print(receiver)
+            print(sender)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
