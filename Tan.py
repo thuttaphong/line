@@ -4154,14 +4154,14 @@ while True:
                 lineBot(op)
 
             msg1= op.message
-            text1 = msg1.text
-            msg_id1 = msg1.id
-            receiver1 = msg1.to
-            sender1 = msg1._from
+            # text1 = msg1.text
+            # msg_id1 = msg1.id
+            # receiver1 = msg1.to
+            # sender1 = msg1._from
             print(msg1)
-            print(text1)
-            print(receiver1)
-            print(sender1)
+            # print(text1)
+            # print(receiver1)
+            # print(sender1)
             oepoll.setRevision(op.revision)
     except Exception as e:
         logError(e)
