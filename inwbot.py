@@ -7,6 +7,7 @@ with open("db.json") as data_file:
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
+	print('test')
 	#sets basic headers for the server
 	def _set_headers(self):
 		self.send_response(200)
@@ -105,5 +106,5 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.send_response(404)
 			
 #Server Initialization
-server = HTTPServer(('127.0.0.1',8080), ServiceHandler)
+server = HTTPServer((8080), ServiceHandler)
 server.serve_forever()
