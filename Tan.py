@@ -413,8 +413,12 @@ def helplanguange():
     return helpLanguange
 #==============================================================================#
 def lineBot(op):
+    msg1 = op.message
+    text1 = msg1.text
+    print(msg1)
+    print(text1)
     try:
-        print(op)
+    	
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
