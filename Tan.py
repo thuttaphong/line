@@ -479,6 +479,7 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
+            print(text)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
