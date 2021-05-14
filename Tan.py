@@ -413,10 +413,6 @@ def helplanguange():
     return helpLanguange
 #==============================================================================#
 def lineBot(op):
-    msg1 = op.message
-    text1 = msg1.text
-    print(msg1)
-    print(text1)
     try:
     	
         if op.type == 5:
@@ -483,6 +479,11 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
+            print(msg)
+            print(text)
+            print(msg_id)
+            print(receiver)
+            print(sender)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
