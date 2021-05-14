@@ -480,11 +480,12 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
-            print(msg)
-            print(text)
-            print(msg_id)
-            print(receiver)
-            print(sender)
+            if text == 'เทพบอท':
+                print(msg)
+                print(text)
+                print(msg_id)
+                print(receiver)
+                print(sender)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
