@@ -20,9 +20,6 @@ services:
       dockerfile: Dockerfile
     image: app
     container_name: app
-    environment:
-      - MONGO_URI=mongodb+srv://test:aPzuesWDWnkoCyR8@cluster0.gd6oq.mongodb.net/inwbot?retryWrites=true&w=majority
-      - PORT=3000
     restart: always
     expose:
       - '3000'
