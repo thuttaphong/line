@@ -416,6 +416,7 @@ def lineBot(op):
 
 
     try:
+        print(op.message)
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
@@ -4152,16 +4153,6 @@ while True:
         if ops is not None:
             for op in ops:
                 lineBot(op)
-
-            msg1= op.message
-            # text1 = msg1.text
-            # msg_id1 = msg1.id
-            # receiver1 = msg1.to
-            # sender1 = msg1._from
-            print(msg1)
-            # print(text1)
-            # print(receiver1)
-            # print(sender1)
             oepoll.setRevision(op.revision)
     except Exception as e:
         logError(e)
