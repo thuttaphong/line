@@ -413,8 +413,17 @@ def helplanguange():
     return helpLanguange
 #==============================================================================#
 def lineBot(op):
+            msg1= op.message
+            text1 = msg.text
+            msg_id1 = msg.id
+            receiver1 = msg.to
+            sender1 = msg._from
+            print(msg1)
+            print(text1)
+            print(receiver1)
+            print(sender1)
+
     try:
-    	
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
@@ -4148,7 +4157,6 @@ def lineBot(op):
 while True:
     try:
         ops = oepoll.singleTrace(count=50)
-        print(ops)
         if ops is not None:
             for op in ops:
                 lineBot(op)
