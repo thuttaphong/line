@@ -19,11 +19,7 @@ WORKDIR /line
 
 COPY . /line
 
-RUN pip3 --no-cache-dir install -r requirements.txt
-
-ENV PATH="/opt/gtk/bin:$PATH"
-
 EXPOSE 8080
 
 ENTRYPOINT ["python3"]
-CMD ["app.py"]
+CMD ["inwbot.py"]
