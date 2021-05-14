@@ -413,9 +413,8 @@ def helplanguange():
     return helpLanguange
 #==============================================================================#
 def lineBot(op):
-
-
     try:
+    	
         if op.type == 5:
             if settings["autoBlock"] == True:
                 line.blockContact(op.param1)           
@@ -480,12 +479,6 @@ def lineBot(op):
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
-            if text == 'เทพบอท':
-                print(msg)
-                print(text)
-                print(msg_id)
-                print(receiver)
-                print(sender)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender
@@ -4158,6 +4151,6 @@ while True:
         if ops is not None:
             for op in ops:
                 lineBot(op)
-            oepoll.setRevision(op.revision)
+                oepoll.setRevision(op.revision)
     except Exception as e:
         logError(e)
