@@ -141,7 +141,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		for key,value in data.items():
 			pass
 		index = int(key)+1
-		print(temp)
+		print(temp.decode('unicode_escape').encode('latin-1').decode('utf8'))
 		data[str(index)]=str(temp)
 		if group is not None:
 			for to in group:
