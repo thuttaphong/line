@@ -188,7 +188,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 						self.oepoll.setRevision(op.revision)
 			except Exception as e:
 				logError(e)
-run()
+self.run()
 #Server Initialization
 server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
