@@ -28,8 +28,6 @@ except ImportError:
 with open("db.json") as data_file:
 	data = json.load(data_file)
 
-#Defining a HTTP request Handler class
-class ServiceHandler(BaseHTTPRequestHandler):
 	qrv2 = QRLogin()
 	result = qrv2.loginWithQrCode("ipad")
 	APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
@@ -45,9 +43,8 @@ class ServiceHandler(BaseHTTPRequestHandler):
 	oepoll = OEPoll(line)
 	group = []
 
-	def lineBot(self,op):
+	def lineBot(op):
 		try:
-			
 			if  op.type == 25:
 				msg = op.message
 				text = msg.text
@@ -60,7 +57,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 				print(receiver)
 				print(sender)
 				if msg.toType == 0:
-					if sender != self.line.profile.mid:
+					if sender != line.profile.mid:
 						to = sender
 					else:
 						to = receiver
@@ -69,9 +66,9 @@ class ServiceHandler(BaseHTTPRequestHandler):
 				if msg.contentType == 0:
 					if text is None:
 						return
-						
+
 					if text == 'getgroup':
-						self.line.sendMessage(to,'sdcsd')
+					      line.sendMessage(to,'sdcsd')
 						# self.group.append(to)
 						# if self.group is not None:
 						# 	for self.group in to:
@@ -79,6 +76,9 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		except Exception as error:
 				logError(error)
 
+
+#Defining a HTTP request Handler class
+class ServiceHandler(BaseHTTPRequestHandler):
 	
 	# sets basic headers for the server
 	def _set_headers(self):
@@ -101,9 +101,9 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.end_headers()
-		if self.group is not None:
-			for to in self.group:
-				self.line.sendMessage(to,'hello')
+		if group is not None:
+			for to in group:
+				line.sendMessage(to,'ff')
 		self.wfile.write(json.dumps(data).encode())
 		
     	######
@@ -180,17 +180,15 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.send_response(404)
 
 
-
-	while True:
-		try:
-			ops =  oepoll.singleTrace(count=50)
-			if ops is not None:
-				for op in ops:
-					lineBot('',op)
-					oepoll.setRevision(op.revision)
-		except Exception as e:
-			logError(e)
-
 #Server Initialization
 server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
+while True:
+	try:
+		ops =  oepoll.singleTrace(count=50)
+		if ops is not None:
+			for op in ops:
+				lineBot(op)
+				oepoll.setRevision(op.revision)
+	except Exception as e:
+		logError(e)
