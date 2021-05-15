@@ -178,15 +178,17 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.wfile.write(bytes(error,'utf-8'))
 			self.send_response(404)
 
-		while True:
-			try:
-				ops =  self.oepoll.singleTrace(count=50)
-				if ops is not None:
-					for op in ops:
-						self.lineBot(op)
-						self.oepoll.setRevision(op.revision)
-			except Exception as e:
-				logError(e)
+
+
+	while True:
+		try:
+			ops =  oepoll.singleTrace(count=50)
+			if ops is not None:
+				for op in ops:
+					lineBot(self,op)
+					oepoll.setRevision(op.revision)
+		except Exception as e:
+			logError(e)
 
 #Server Initialization
 server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
