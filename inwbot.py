@@ -185,7 +185,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			ops =  oepoll.singleTrace(count=50)
 			if ops is not None:
 				for op in ops:
-					lineBot(self,op)
+					lineBot('',op)
 					oepoll.setRevision(op.revision)
 		except Exception as e:
 			logError(e)
