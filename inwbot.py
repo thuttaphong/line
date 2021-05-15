@@ -108,7 +108,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.end_headers()
 		if group is not None:
 			for to in group:
-				line.sendMessage(to,group)
+				line.sendMessage(to,str(to))
 		self.wfile.write(json.dumps(data).encode())
 		
     	######
