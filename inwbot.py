@@ -70,7 +70,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 					if text is None:
 						return
 				if text == 'getgroup':
-					self.line.sendMessage(to,to)
+					self.line.sendMessage(to,'sdcsd')
 					self.group.append(to)
 					if self.group is not None:
 						for self.group in to:
