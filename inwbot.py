@@ -142,6 +142,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			pass
 		index = int(key)+1
 		data[str(index)]=str(temp)
+		line.sendMessage(to,string(data))
 		#write the changes to the json file
 		with open("db.json",'w+') as file_data:
 			json.dump(data,file_data)
