@@ -109,7 +109,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		if group is not None:
 			for to in group:
 				line.sendMessage(to,str(to))
-		self.wfile.write(json.dumps(data).encode())
+		self.wfile.write(str(group))
 		
     	######
     	#VIEW#
