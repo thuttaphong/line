@@ -70,10 +70,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 					if text is None:
 						return
 				if text == 'getgroup':
-					data = self.line.getGroupIdsInvited
-					data1 = self.line.getGroupIdsJoined
-					print(data)
-					print(data1)
+					self.line.sendMessage(to,'sfs')
 		except Exception as error:
 				logError(error)
 
