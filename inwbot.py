@@ -14,6 +14,7 @@ import youtube_dl, pafy, asyncio
 from multiprocessing import Pool, Process
 from googletrans import Translator
 from http.server import HTTPServer, BaseHTTPRequestHandler
+import asyncio
 import json
 #==============================================================================#
 botStart = time.time()
@@ -38,10 +39,10 @@ class ServiceHandler(BaseHTTPRequestHandler):
 	line.log("Auth Token : " + str(line.authToken))
 	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
 	print ("Login Succes")
-
 	lineMID = line.profile.mid
 	lineProfile = line.getProfile()
 	lineSettings = line.getSettings()
+	
 	# sets basic headers for the server
 	def _set_headers(self):
 		self.send_response(200)
@@ -63,7 +64,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.end_headers()
-		self.line.getGroupsV2('','')
+		# self.line.getGroupsV2('','')
 		#prints all the keys and values of the json file
 		self.wfile.write(json.dumps(data).encode())
 		
@@ -139,7 +140,12 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			error = "NOT FOUND!"
 			self.wfile.write(bytes(error,'utf-8'))
 			self.send_response(404)
-			
+
 #Server Initialization
 server = HTTPServer(('127.0.0.1',8081), ServiceHandler)
-server.serve_forever()
+threading.Thread(target=server.serve_forever).start()
+while True:
+    try:
+	     print('test')
+    except Exception as e:
+         logError(e)
