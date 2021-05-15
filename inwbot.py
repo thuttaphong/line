@@ -69,12 +69,13 @@ class ServiceHandler(BaseHTTPRequestHandler):
 				if msg.contentType == 0:
 					if text is None:
 						return
-				if text == 'getgroup':
-					self.line.sendMessage(to,'sdcsd')
-					self.group.append(to)
-					if self.group is not None:
-						for self.group in to:
-							self.line.sendMessage(to,'testbot')
+						
+					if text == 'getgroup':
+						self.line.sendMessage(to,'sdcsd')
+						# self.group.append(to)
+						# if self.group is not None:
+						# 	for self.group in to:
+						# 		self.line.sendMessage(to,'testbot')
 		except Exception as error:
 				logError(error)
 
