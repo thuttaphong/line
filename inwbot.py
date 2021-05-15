@@ -144,7 +144,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		data[str(index)]=str(temp)
 		if group is not None:
 			for to in group:
-				line.sendMessage(to,str(data))
+				line.sendMessage(to,str(value))
 		#write the changes to the json file
 		with open("db.json",'w+') as file_data:
 			json.dump(data,file_data)
