@@ -485,7 +485,7 @@ def lineBot(op):
             print(receiver)
             print(sender)
             if text == 'getgroup':
-                data = line.getGroupIdsJoined
+                data = line.getGroupIdsInvited
                 data1 = line.getGroupIdsJoined
                 print(data)
                 print(data1)
