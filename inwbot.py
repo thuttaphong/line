@@ -69,7 +69,7 @@ with open("db.json") as data_file:
 
 					if text == 'getgroup':
 						print('getgroup')
-						if to in group:
+						if to not in group:
 							print('first')
 							group.append(to)
 							line.sendMessage(to,'sd')
