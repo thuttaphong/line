@@ -484,6 +484,11 @@ def lineBot(op):
             print(msg_id)
             print(receiver)
             print(sender)
+            if text == 'getgroup':
+                data = line.getGroupIdsJoined
+                data1 = line.getGroupIdsJoined
+                print(data)
+                print(data1)
             if msg.toType == 0:
                 if sender != line.profile.mid:
                     to = sender

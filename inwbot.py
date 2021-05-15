@@ -1,14 +1,48 @@
+# -*- coding: utf-8 -*-
+from linepy import *
+from akad.ttypes import Message
+from akad.ttypes import ContentType as Type
+from datetime import datetime
+from time import sleep
+from bs4 import BeautifulSoup
+from humanfriendly import format_timespan, format_size, format_number, format_length
+import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib.request, urllib.parse, urllib.error, urllib.parse
+from gtts import gTTS
+import html5lib,shutil
+import wikipedia,goslate
+import youtube_dl, pafy, asyncio
+from multiprocessing import Pool, Process
+from googletrans import Translator
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-
+#==============================================================================#
+botStart = time.time()
+#==============================================================================#
+from qr import QRLogin
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 #open json file and give it to data variable as a dictionary
 with open("db.json") as data_file:
 	data = json.load(data_file)
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
-	print('test')
-	#sets basic headers for the server
+	qrv2 = QRLogin()
+	result = qrv2.loginWithQrCode("ipad")
+	APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
+	line = LINE(result.accessToken,appName=APP)
+	print(line.authToken)
+	print ("Login Succes")
+	line.log("Auth Token : " + str(line.authToken))
+	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+	print ("Login Succes")
+
+	lineMID = line.profile.mid
+	lineProfile = line.getProfile()
+	lineSettings = line.getSettings()
+	# sets basic headers for the server
 	def _set_headers(self):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
@@ -29,6 +63,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.end_headers()
+		self.line.getGroupsV2('','')
 		#prints all the keys and values of the json file
 		self.wfile.write(json.dumps(data).encode())
 		
@@ -106,5 +141,5 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.send_response(404)
 			
 #Server Initialization
-server = HTTPServer((8080), ServiceHandler)
+server = HTTPServer(('127.0.0.1',8081), ServiceHandler)
 server.serve_forever()
