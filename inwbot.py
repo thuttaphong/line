@@ -178,7 +178,6 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.wfile.write(bytes(error,'utf-8'))
 			self.send_response(404)
 
-	def run(self):
 		while True:
 			try:
 				ops =  self.oepoll.singleTrace(count=50)
@@ -192,4 +191,3 @@ class ServiceHandler(BaseHTTPRequestHandler):
 #Server Initialization
 server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
-run()
