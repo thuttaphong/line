@@ -93,7 +93,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		length = int(self.headers['Content-Length'])
 		#reads the contents of the request
 		content = self.rfile.read(length)
-		temp = str(content['data'].decode('unicode_escape').encode('latin-1').decode('utf8')).strip('b\'')
+		temp = str(content.decode('unicode_escape').encode('latin-1').decode('utf8')).strip('b\'')
 		self.end_headers()
 		return temp
 		
