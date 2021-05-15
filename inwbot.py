@@ -74,7 +74,6 @@ class ServiceHandler(BaseHTTPRequestHandler):
 					self.group.append(to)
 					if self.group is not None:
 						for self.group in to:
-							lineBot(to)
 							self.line.sendMessage(to,'testbot')
 		except Exception as error:
 				logError(error)
@@ -102,8 +101,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-type','text/json')
 		self.end_headers()
 		if self.group is not None:
-			for self.group in to:
-				lineBot(to)
+			for to in self.group:
 				self.line.sendMessage(to,'hello')
 		self.wfile.write(json.dumps(data).encode())
 		
@@ -180,15 +178,17 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.wfile.write(bytes(error,'utf-8'))
 			self.send_response(404)
 
+	def run(self):
+		while True:
+			try:
+				ops =  self.oepoll.singleTrace(count=50)
+				if ops is not None:
+					for op in ops:
+						self.lineBot(op)
+						self.oepoll.setRevision(op.revision)
+			except Exception as e:
+				logError(e)
+
 #Server Initialization
 server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
-while True:
-    try:
-        ops = oepoll.singleTrace(count=50)
-        if ops is not None:
-            for op in ops:
-                lineBot(op)
-                oepoll.setRevision(op.revision)
-    except Exception as e:
-        logError(e)
