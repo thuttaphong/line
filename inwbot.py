@@ -30,18 +30,18 @@ with open("db.json") as data_file:
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
-	qrv2 = QRLogin()
-	result = qrv2.loginWithQrCode("ipad")
-	APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
-	line = LINE(result.accessToken,appName=APP)
-	print(line.authToken)
-	print ("Login Succes")
-	line.log("Auth Token : " + str(line.authToken))
-	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
-	print ("Login Succes")
-	lineMID = line.profile.mid
-	lineProfile = line.getProfile()
-	lineSettings = line.getSettings()
+	# qrv2 = QRLogin()
+	# result = qrv2.loginWithQrCode("ipad")
+	# APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
+	# line = LINE(result.accessToken,appName=APP)
+	# print(line.authToken)
+	# print ("Login Succes")
+	# line.log("Auth Token : " + str(line.authToken))
+	# line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+	# print ("Login Succes")
+	# lineMID = line.profile.mid
+	# lineProfile = line.getProfile()
+	# lineSettings = line.getSettings()
 	
 	# sets basic headers for the server
 	def _set_headers(self):
@@ -142,7 +142,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.send_response(404)
 
 #Server Initialization
-server = HTTPServer(('127.0.0.1',8081), ServiceHandler)
+server = HTTPServer(('159.65.135.151',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
 while True:
     try:
