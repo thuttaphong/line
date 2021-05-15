@@ -68,9 +68,12 @@ with open("db.json") as data_file:
 						return
 
 					if text == 'getgroup':
+						print('getgroup')
 						if to in group:
+							print('first')
 							group.append(to)
 							line.sendMessage(to,'sd')
+							print('last')
 
 						# self.group.append(to)
 						# if self.group is not None:
