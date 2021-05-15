@@ -30,18 +30,53 @@ with open("db.json") as data_file:
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
-	# qrv2 = QRLogin()
-	# result = qrv2.loginWithQrCode("ipad")
-	# APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
-	# line = LINE(result.accessToken,appName=APP)
-	# print(line.authToken)
-	# print ("Login Succes")
-	# line.log("Auth Token : " + str(line.authToken))
-	# line.log("Timeline Token : " + str(line.tl.channelAccessToken))
-	# print ("Login Succes")
-	# lineMID = line.profile.mid
-	# lineProfile = line.getProfile()
-	# lineSettings = line.getSettings()
+	qrv2 = QRLogin()
+	result = qrv2.loginWithQrCode("ipad")
+	APP = "IOSIPAD\t10.1.1\tiPhone 8\t11.2.5"
+	line = LINE(result.accessToken,appName=APP)
+	print(line.authToken)
+	print ("Login Succes")
+	line.log("Auth Token : " + str(line.authToken))
+	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+	print ("Login Succes")
+	lineMID = line.profile.mid
+	lineProfile = line.getProfile()
+	lineSettings = line.getSettings()
+	oepoll = OEPoll(line)
+	group = []
+
+	def lineBot(self,op):
+		try:
+			
+			if  op.type == 25:
+				msg = op.message
+				text = msg.text
+				msg_id = msg.id
+				receiver = msg.to
+				sender = msg._from
+				print(msg)
+				print(text)
+				print(msg_id)
+				print(receiver)
+				print(sender)
+				if msg.toType == 0:
+					if sender != self.line.profile.mid:
+						to = sender
+					else:
+						to = receiver
+				else:
+					to = receiver
+				if msg.contentType == 0:
+					if text is None:
+						return
+				if text == 'getgroup':
+					data = self.line.getGroupIdsInvited
+					data1 = self.line.getGroupIdsJoined
+					print(data)
+					print(data1)
+		except Exception as error:
+				logError(error)
+
 	
 	# sets basic headers for the server
 	def _set_headers(self):
@@ -142,7 +177,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 			self.send_response(404)
 
 #Server Initialization
-server = HTTPServer(('159.65.135.151',8081), ServiceHandler)
+server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
 while True:
     try:
