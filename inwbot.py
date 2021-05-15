@@ -70,7 +70,12 @@ class ServiceHandler(BaseHTTPRequestHandler):
 					if text is None:
 						return
 				if text == 'getgroup':
-					self.line.sendMessage(to,'sfs')
+					self.line.sendMessage(to,to)
+					self.group.append(to)
+					if self.group is not None:
+						for self.group in to:
+							lineBot(to)
+							self.line.sendMessage(to,'testbot')
 		except Exception as error:
 				logError(error)
 
@@ -96,8 +101,10 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.end_headers()
-		# self.line.getGroupsV2('','')
-		#prints all the keys and values of the json file
+		if self.group is not None:
+			for self.group in to:
+				lineBot(to)
+				self.line.sendMessage(to,'hello')
 		self.wfile.write(json.dumps(data).encode())
 		
     	######
@@ -178,6 +185,10 @@ server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
 while True:
     try:
-	     print('test')
+        ops = oepoll.singleTrace(count=50)
+        if ops is not None:
+            for op in ops:
+                lineBot(op)
+                oepoll.setRevision(op.revision)
     except Exception as e:
-         logError(e)
+        logError(e)
