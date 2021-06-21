@@ -20,3 +20,4 @@ Naked
 youtube_dl
 humanize
 lesting.api.client
+goslate
