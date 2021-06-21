@@ -99,9 +99,9 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 		self.send_header('Content-type','text/json')
 		self.end_headers()
-		# if group is not None:
-		# 	for to in group:
-		# 		line.sendMessage(to,str(to))
+		if group is not None:
+			for to in group:
+				line.sendMessage(to,str(to))
 		self.wfile.write(json.dumps(group).encode())
 		
     	######
@@ -135,9 +135,9 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		index = int(key)+1
 		print(temp)
 		data[str(index)]=str(temp)
-		# if group is not None:
-		# 	for to in group:
-		# 		line.sendMessage(to,str(temp))
+		if group is not None:
+			for to in group:
+				line.sendMessage(to,str(temp))
 		#write the changes to the json file
 		with open("db.json",'w+') as file_data:
 			json.dump(data,file_data)
