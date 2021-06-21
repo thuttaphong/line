@@ -24,56 +24,56 @@ with open("db.json") as data_file:
 	data = json.load(data_file)
 	# line = LINE()
 	# line = LINE("เมล","พาส")
-	line = LINE('ohm_the_omyim@hotmail.com', '177887ohm')
-	line.log("Auth Token : " + str(line.authToken))
-	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
-
-	print ("Login Succes")
-
-	lineMID = line.profile.mid
-	lineProfile = line.getProfile()
-	lineSettings = line.getSettings()
-	oepoll = OEPoll(line)
-	group = []
-
-	def lineBot(op):
-		try:
-			if  op.type == 25:
-				msg = op.message
-				text = msg.text
-				msg_id = msg.id
-				receiver = msg.to
-				sender = msg._from
-				print(msg)
-				print(text)
-				print(msg_id)
-				print(receiver)
-				print(sender)
-				if msg.toType == 0:
-					if sender != line.profile.mid:
-						to = sender
-					else:
-						to = receiver
-				else:
-					to = receiver
-				if msg.contentType == 0:
-					if text is None:
-						return
-
-					if text == 'getgroup':
-						print('getgroup')
-						if to not in group:
-							print('first')
-							group.append(to)
-							line.sendMessage(to,'sd')
-							print('last')
-
-						# self.group.append(to)
-						# if self.group is not None:
-						# 	for self.group in to:
-						# 		self.line.sendMessage(to,'testbot')
-		except Exception as error:
-				logError(error)
+	# line = LINE('ohm_the_omyim@hotmail.com', '177887ohm')
+	# line.log("Auth Token : " + str(line.authToken))
+	# line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+	#
+	# print ("Login Succes")
+	#
+	# lineMID = line.profile.mid
+	# lineProfile = line.getProfile()
+	# lineSettings = line.getSettings()
+	# oepoll = OEPoll(line)
+	# group = []
+	#
+	# def lineBot(op):
+	# 	try:
+	# 		if  op.type == 25:
+	# 			msg = op.message
+	# 			text = msg.text
+	# 			msg_id = msg.id
+	# 			receiver = msg.to
+	# 			sender = msg._from
+	# 			print(msg)
+	# 			print(text)
+	# 			print(msg_id)
+	# 			print(receiver)
+	# 			print(sender)
+	# 			if msg.toType == 0:
+	# 				if sender != line.profile.mid:
+	# 					to = sender
+	# 				else:
+	# 					to = receiver
+	# 			else:
+	# 				to = receiver
+	# 			if msg.contentType == 0:
+	# 				if text is None:
+	# 					return
+	#
+	# 				if text == 'getgroup':
+	# 					print('getgroup')
+	# 					if to not in group:
+	# 						print('first')
+	# 						group.append(to)
+	# 						line.sendMessage(to,'sd')
+	# 						print('last')
+	#
+	# 					# self.group.append(to)
+	# 					# if self.group is not None:
+	# 					# 	for self.group in to:
+	# 					# 		self.line.sendMessage(to,'testbot')
+	# 	except Exception as error:
+	# 			logError(error)
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
@@ -183,14 +183,14 @@ class ServiceHandler(BaseHTTPRequestHandler):
 
 
 #Server Initialization
-server = HTTPServer(('0.0.0.0',3000), ServiceHandler)
+server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
-while True:
-	try:
-		ops =  oepoll.singleTrace(count=50)
-		if ops is not None:
-			for op in ops:
-				lineBot(op)
-				oepoll.setRevision(op.revision)
-	except Exception as e:
-		logError(e)
+# while True:
+# 	try:
+# 		ops =  oepoll.singleTrace(count=50)
+# 		if ops is not None:
+# 			for op in ops:
+# 				lineBot(op)
+# 				oepoll.setRevision(op.revision)
+# 	except Exception as e:
+# 		logError(e)
