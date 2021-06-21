@@ -14,4 +14,4 @@ RUN pip3 install -r requirements.txt
 COPY src/ .
 
 # command to run on container start
-CMD [ "python", "./server.py" ]
+CMD [ "python3", "./server.py" ]
