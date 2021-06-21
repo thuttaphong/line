@@ -19,52 +19,59 @@ import json
 #==============================================================================#
 botStart = time.time()
 #==============================================================================#
-#line = LINE()
-#line = LINE("เมล","พาส")
-line = LINE('ohm_the_omyim@hotmail.com','177887ohm')
-line.log("Auth Token : " + str(line.authToken))
-line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+#open json file and give it to data variable as a dictionary
+with open("db.json") as data_file:
+	data = json.load(data_file)
+	line = LINE('ohm_the_omyim@hotmail.com','177887ohm')
+	print(line.authToken)
+	print ("Login Succes")
+	line.log("Auth Token : " + str(line.authToken))
+	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+	print ("Login Succes")
+	lineMID = line.profile.mid
+	lineProfile = line.getProfile()
+	lineSettings = line.getSettings()
+	oepoll = OEPoll(line)
+	group = []
 
-print ("Login Succes")
-
-lineMID = line.profile.mid
-lineProfile = line.getProfile()
-lineSettings = line.getSettings()
-oepoll = OEPoll(line)
-group = []
-def lineBot(op):
-	try:
-		if  op.type == 25:
-			msg = op.message
-			text = msg.text
-			msg_id = msg.id
-			receiver = msg.to
-			sender = msg._from
-			print(msg)
-			print(text)
-			print(msg_id)
-			print(receiver)
-			print(sender)
-			if msg.toType == 0:
-				if sender != line.profile.mid:
-					to = sender
+	def lineBot(op):
+		try:
+			if  op.type == 25:
+				msg = op.message
+				text = msg.text
+				msg_id = msg.id
+				receiver = msg.to
+				sender = msg._from
+				print(msg)
+				print(text)
+				print(msg_id)
+				print(receiver)
+				print(sender)
+				if msg.toType == 0:
+					if sender != line.profile.mid:
+						to = sender
+					else:
+						to = receiver
 				else:
 					to = receiver
-			else:
-				to = receiver
-			if msg.contentType == 0:
-				if text is None:
-					return
+				if msg.contentType == 0:
+					if text is None:
+						return
 
-				if text == 'getgroup':
-					print('getgroup')
-					if to not in group:
-						print('first')
-						group.append(to)
-						line.sendMessage(to,'sd')
-					print('last')
-	except Exception as error:
-		logError(error)
+					if text == 'getgroup':
+						print('getgroup')
+						if to not in group:
+							print('first')
+							group.append(to)
+							line.sendMessage(to,'sd')
+							print('last')
+
+						# self.group.append(to)
+						# if self.group is not None:
+						# 	for self.group in to:
+						# 		self.line.sendMessage(to,'testbot')
+		except Exception as error:
+				logError(error)
 
 #Defining a HTTP request Handler class
 class ServiceHandler(BaseHTTPRequestHandler):
