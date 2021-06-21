@@ -14,4 +14,4 @@ RUN pip3 install -r requirements.txt
 COPY / .
 
 # command to run on container start
-CMD [ "python3", "./server.py" ]
+CMD [ "python3", "./inwbot.py" ]
