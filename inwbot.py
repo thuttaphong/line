@@ -22,12 +22,14 @@ botStart = time.time()
 #open json file and give it to data variable as a dictionary
 with open("db.json") as data_file:
 	data = json.load(data_file)
-	line = LINE('ohm_the_omyim@hotmail.com','177887ohm')
-	print(line.authToken)
-	print ("Login Succes")
+	# line = LINE()
+	# line = LINE("เมล","พาส")
+	line = LINE('ohm_the_omyim@hotmail.com', '177887ohm')
 	line.log("Auth Token : " + str(line.authToken))
 	line.log("Timeline Token : " + str(line.tl.channelAccessToken))
+
 	print ("Login Succes")
+
 	lineMID = line.profile.mid
 	lineProfile = line.getProfile()
 	lineSettings = line.getSettings()
