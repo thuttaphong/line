@@ -19,5 +19,4 @@ akad
 Naked
 youtube_dl
 humanize
-traceback
 lesting.api.client
