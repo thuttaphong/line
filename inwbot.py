@@ -22,20 +22,19 @@ botStart = time.time()
 #open json file and give it to data variable as a dictionary
 with open("db.json") as data_file:
 	data = json.load(data_file)
-	# line = LINE()
-	# line = LINE("เมล","พาส")
-	# line = LINE('ohm_the_omyim@hotmail.com', '177887ohm')
+
+	# line = LINE(result.accessToken,appName=APP)
+	# print(line.authToken)
+	# print ("Login Succes")
 	# line.log("Auth Token : " + str(line.authToken))
 	# line.log("Timeline Token : " + str(line.tl.channelAccessToken))
-	#
 	# print ("Login Succes")
-	#
 	# lineMID = line.profile.mid
 	# lineProfile = line.getProfile()
 	# lineSettings = line.getSettings()
 	# oepoll = OEPoll(line)
-	# group = []
-	#
+	group = []
+
 	# def lineBot(op):
 	# 	try:
 	# 		if  op.type == 25:
@@ -183,7 +182,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 
 
 #Server Initialization
-server = HTTPServer(('0.0.0.0',9800), ServiceHandler)
+server = HTTPServer(('0.0.0.0',8888), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
 # while True:
 # 	try:
