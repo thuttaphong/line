@@ -1,23 +1,17 @@
-FROM python:3.6-alpine3.7
+# set base image (host OS)
+FROM python:3.8
 
-RUN apk add --no-cache python3-dev \
-    && pip3 install --upgrade pip
+# set the working directory in the container
+WORKDIR /code
 
-RUN apk add --no-cache --update \
-    python3 python3-dev gcc \
-    gfortran musl-dev
+# copy the dependencies file to the working directory
+COPY requirements.txt .
 
-RUN apk add --no-cache libressl-dev musl-dev libffi-dev
+# install dependencies
+RUN pip install -r requirements.txt
 
-RUN python3.6 -m pip install --upgrade pip
+# copy the content of the local src directory to the working directory
+COPY src/ .
 
-RUN apk --no-cache add git
-
-RUN apk add mariadb-dev
-
-WORKDIR /line
-
-COPY . /line
-
-ENTRYPOINT ["python3"]
-CMD ["inwbot.py"]
+# command to run on container start
+CMD [ "python", "./server.py" ]

@@ -1,19 +1,6 @@
 version: '3.7'
 
 services:
-  nginx_dev:
-    image: nginx:latest
-    container_name: nginx_proxy
-    restart: always
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - app
-    networks:
-      - network
-
   app:
     build:
       context: .
@@ -23,9 +10,3 @@ services:
     restart: always
     expose:
       - '3000'
-    networks:
-      - network
-
-networks:
-  network:
-    driver: bridge
