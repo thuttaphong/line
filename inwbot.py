@@ -183,7 +183,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 
 
 #Server Initialization
-server = HTTPServer(('0.0.0.0',8081), ServiceHandler)
+server = HTTPServer(('0.0.0.0',9800), ServiceHandler)
 threading.Thread(target=server.serve_forever).start()
 # while True:
 # 	try:
