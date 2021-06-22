@@ -8,5 +8,5 @@ services:
     image: app
     container_name: app
     restart: always
-    expose:
-      - '3000'
+    ports:
+      - 2222:2222
