@@ -4,9 +4,7 @@
     "autoJoinTicket": false,
     "autoLeave": false,
     "autoRead": false,
-    "blacklist": {
-        "uf6b0fecdf26459e6a48b5a387c1144d2": true
-    },
+    "blacklist": {},
     "canceljoin": false,
     "cancelprotect": false,
     "changeGroupPicture": {},
